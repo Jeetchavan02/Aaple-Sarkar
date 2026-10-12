@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aaple Sarkar | Government of Maharashtra Citizen Services Portal</title>
+  <meta name="description" content="Redesigned citizen services portal for the Government of Maharashtra. Apply for certificates, track applications, and access government schemes with ease.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- Announcement / Accessibility Banner -->
+  <div class="top-utility-bar">
+    <div class="container utility-content">
+      <div class="utility-left">
+        <span class="gov-badge"><span class="flag-dot"></span> Government of Maharashtra | महाराष्ट्र शासन</span>
+        <span class="utility-divider">|</span>
+        <span class="rts-tag">Right to Public Services (RTS) Portal</span>
+      </div>
+      <div class="utility-right">
+        <button class="text-size-btn" id="decrease-font" title="Decrease font size" aria-label="Decrease font size">A-</button>
+        <button class="text-size-btn" id="normal-font" title="Default font size" aria-label="Default font size">A</button>
+        <button class="text-size-btn" id="increase-font" title="Increase font size" aria-label="Increase font size">A+</button>
+        <span class="utility-divider">|</span>
+        <button class="lang-switch-btn" id="lang-toggle" aria-label="Switch Language">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span id="current-lang">मराठी</span>
+        </button>
+        <span class="utility-divider">|</span>
+        <a href="tel:18001208040" class="helpline-link">Toll Free: 1800-120-8040</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header (Sticky) -->
+  <header class="main-header" id="main-header">
+    <div class="container header-container">
+      <a href="#home" class="brand-link" data-nav="home">
+        <div class="brand-emblem">
+          <svg class="maha-emblem-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+            <rect width="44" height="44" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+            <circle cx="22" cy="22" r="16" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.2" stroke-dasharray="2 2"/>
+            <path d="M22 9L33 19H29V31H15V19H11L22 9Z" fill="#1B4D89"/>
+            <path d="M22 13L29 19.5H26V28H18V19.5H15L22 13Z" fill="#F37023"/>
+            <circle cx="22" cy="22" r="3.5" fill="#FBBF24"/>
+            <path d="M14 33C18 36 26 36 30 33" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-title"><span class="brand-title-mr">आपले सरकार</span> <span class="brand-sub-accent">Aaple Sarkar</span></span>
+          <span class="brand-subtitle"><span class="rts-orange-text">महाराष्ट्र लोकसेवा हक्क</span> • Right to Public Services</span>
+        </div>
+      </a>
+
+      <!-- Center Navigation Links -->
+      <nav class="center-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><button class="nav-item active" data-nav="home" id="nav-home">Home</button></li>
+          <li><button class="nav-item" data-nav="services" id="nav-services">Services</button></li>
+          <li><button class="nav-item" data-nav="track" id="nav-track">Track Application</button></li>
+          <li><button class="nav-item" data-nav="faq" id="nav-faq">Help & FAQ</button></li>
+          <li><button class="nav-item" data-nav="contact" id="nav-contact">Contact</button></li>
+        </ul>
+      </nav>
+
+      <!-- Right Header Actions -->
+      <div class="header-actions">
+        <button class="btn-outline-primary" id="header-login-btn" data-nav="auth">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span id="header-auth-label">Citizen Login</span>
+        </button>
+        <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Quick Screen Switcher (For user testing convenience) -->
+  <aside class="screen-picker-bar">
+    <div class="container screen-picker-inner">
+      <span class="screen-picker-title">Screen Switcher:</span>
+      <div class="screen-pills">
+        <button class="pill-btn active" data-screen-jump="home">Screen 1: Home</button>
+        <button class="pill-btn" data-screen-jump="services">Screen 2: Services</button>
+        <button class="pill-btn" data-screen-jump="auth">Screen 3: Login & Register</button>
+        <button class="pill-btn" data-screen-jump="track">Screen 4: Track Application</button>
+        <button class="pill-btn" data-screen-jump="apply">Screen 5: Application Form</button>
+        <button class="pill-btn" data-screen-jump="faq">Screen 6: Help & FAQ</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN VIEWPORT CONTAINER -->
+  <main id="main-content" class="main-viewport">
+
+    <!-- ========================================== -->
+    <!-- SCREEN 1: HOMEPAGE                         -->
+    <!-- ========================================== -->
+    <section id="screen-home" class="screen-view active">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container hero-container">
+          <div class="hero-badge-pill">
+            <span class="dot-live"></span> Right to Services Act, 2015 Compliant
+          </div>
+          <h1 class="hero-heading">Find Government Services Easily</h1>
+          <p class="hero-subheading">
+            Apply online for certificates and services from the Government of Maharashtra without visiting offices.
+          </p>
+
+          <!-- Large Centered Search Bar -->
+          <div class="hero-search-wrapper">
+            <div class="search-input-box">
+              <span class="search-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </span>
+              <input type="text" id="home-search-input" class="search-input" placeholder="Search for any service eg. Income Certificate, Domicile, Caste..." autocomplete="off">
+              <button class="btn-clear-search" id="clear-home-search" style="display:none;" aria-label="Clear Search">&times;</button>
+              <button class="btn-primary-orange search-action-btn" id="home-search-btn">
+                <span>Search Service</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+              </button>
+            </div>
+            <!-- Quick popular tags -->
+            <div class="popular-search-tags">
+              <span class="popular-tag-label">Popular Searches:</span>
+              <button class="pop-tag" data-tag="Income Certificate">Income Certificate</button>
+              <button class="pop-tag" data-tag="Caste Certificate">Caste Certificate</button>
+              <button class="pop-tag" data-tag="Domicile">Domicile Certificate</button>
+              <button class="pop-tag" data-tag="Senior Citizen">Senior Citizen Card</button>
+              <button class="pop-tag" data-tag="Solvency">Solvency</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Actions Row (3 Cards) -->
+      <section class="section-quick-actions">
+        <div class="container">
+          <div class="quick-actions-grid">
+            <!-- Card 1 -->
+            <div class="quick-card" data-action="goto-services">
+              <div class="quick-card-icon-wrap icon-blue">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+              <div class="quick-card-content">
+                <h3 class="quick-card-title">Apply for Service</h3>
+                <p class="quick-card-desc">Browse through 150+ citizen services and fill application forms online.</p>
+              </div>
+              <span class="quick-card-arrow">
+                Explore Services
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="quick-card" data-action="goto-track">
+              <div class="quick-card-icon-wrap icon-orange">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><path d="M11 8v6l4 2"></path></svg>
+              </div>
+              <div class="quick-card-content">
+                <h3 class="quick-card-title">Track Application</h3>
+                <p class="quick-card-desc">Check real-time department scrutiny, review status, and approval dates.</p>
+              </div>
+              <span class="quick-card-arrow">
+                Track Status
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="quick-card" data-action="goto-auth">
+              <div class="quick-card-icon-wrap icon-green">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              </div>
+              <div class="quick-card-content">
+                <h3 class="quick-card-title">Download Certificate</h3>
+                <p class="quick-card-desc">Login to your citizen locker to instantly retrieve digitally signed certificates.</p>
+              </div>
+              <span class="quick-card-arrow">
+                Citizen Locker
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Departments & Services Section -->
+      <section class="section-departments">
+        <div class="container">
+          <div class="section-header-block">
+            <div class="section-title-wrap">
+              <span class="section-kicker">Catalog of Public Services</span>
+              <h2 class="section-heading">Browse by Department</h2>
+              <p class="section-subtext">Select a department or explore the most frequently accessed civic services across Maharashtra.</p>
+            </div>
+            <button class="btn-link-action" data-nav="services">
+              View All 150+ Services
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+
+          <!-- Horizontal Scrollable Tab Pills -->
+          <div class="department-tabs-scroller" role="tablist">
+            <button class="dept-tab active" data-dept="all" role="tab" aria-selected="true">All Services</button>
+            <button class="dept-tab" data-dept="Revenue" role="tab" aria-selected="false">Revenue (महसूल)</button>
+            <button class="dept-tab" data-dept="Health" role="tab" aria-selected="false">Health (आरोग्य)</button>
+            <button class="dept-tab" data-dept="Education" role="tab" aria-selected="false">Education (शिक्षण)</button>
+            <button class="dept-tab" data-dept="Agriculture" role="tab" aria-selected="false">Agriculture (कृषी)</button>
+            <button class="dept-tab" data-dept="Housing" role="tab" aria-selected="false">Housing (गृहनिर्माण)</button>
+            <button class="dept-tab" data-dept="Social Welfare" role="tab" aria-selected="false">Social Welfare (सामाजिक न्याय)</button>
+          </div>
+
+          <!-- Service Cards Grid (3 Columns) -->
+          <div class="services-grid" id="home-services-grid">
+            <!-- Dynamically populated or rendered via JS/HTML -->
+          </div>
+
+          <div class="view-more-center">
+            <button class="btn-secondary-outline btn-large" data-nav="services">
+              <span>Explore All Department Services</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Integration Strip (Reflecting Official Maha Integration Badges in Clean Modern Style) -->
+      <section class="integration-strip">
+        <div class="container">
+          <div class="integration-grid">
+            <!-- DigiLocker -->
+            <div class="integration-item item-digilocker">
+              <div class="integration-icon icon-digilocker">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="2"></circle></svg>
+              </div>
+              <div class="integration-text">
+                <strong class="integration-title">DigiLocker Ready</strong>
+                <span>Paperless verified certificate repository</span>
+              </div>
+            </div>
+
+            <!-- Aadhaar -->
+            <div class="integration-item item-aadhaar">
+              <div class="integration-icon icon-aadhaar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </div>
+              <div class="integration-text">
+                <strong class="integration-title">Aadhaar Integrated</strong>
+                <span>Instant OTP authentication via UIDAI</span>
+              </div>
+            </div>
+
+            <!-- PayGov India -->
+            <div class="integration-item item-paygov">
+              <div class="integration-icon icon-paygov">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+              </div>
+              <div class="integration-text">
+                <strong class="integration-title">PayGov Payment</strong>
+                <span>Zero charge gateway for RTS processing</span>
+              </div>
+            </div>
+
+            <!-- Digitally Signed -->
+            <div class="integration-item item-digisign">
+              <div class="integration-icon icon-digisign">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+              </div>
+              <div class="integration-text">
+                <strong class="integration-title">Digitally Signed</strong>
+                <span>QR-stamped eSign legal authenticity</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Aaple Sarkar Redesign Stats/Features -->
+      <section class="section-stats">
+        <div class="container stats-container">
+          <div class="stat-box">
+            <span class="stat-number">15+ Days</span>
+            <span class="stat-label">Maximum SLA Timeframe</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">3.8 Cr+</span>
+            <span class="stat-label">Certificates Issued to Citizens</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Faceless & Paperless Process</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">36 Districts</span>
+            <span class="stat-label">Coverage Across Maharashtra</span>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 2: SERVICES PAGE                    -->
+    <!-- ========================================== -->
+    <section id="screen-services" class="screen-view">
+      <div class="page-header-band">
+        <div class="container">
+          <div class="breadcrumbs">
+            <button class="breadcrumb-link" data-nav="home">Home</button>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">All Services</span>
+          </div>
+          <div class="services-header-content">
+            <div>
+              <h1 class="page-title">All Services</h1>
+              <p class="page-subtitle">Access certified public services provided by the Government of Maharashtra under the RTS Act.</p>
+            </div>
+            <div class="active-services-counter">
+              <span class="badge-count" id="services-counter-badge">13 Services Available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container content-page-body">
+        <!-- Search & Filter Controls -->
+        <div class="services-filter-panel">
+          <div class="filter-search-input-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="services-search-input" class="filter-search-input" placeholder="Search service by name, certificate type, or keyword...">
+            <button class="filter-clear-btn" id="services-clear-search" style="display:none;">Clear</button>
+          </div>
+
+          <!-- Department Filter Tabs -->
+          <div class="dept-pills-row" id="catalog-dept-filters" role="tablist">
+            <button class="filter-pill active" data-filter="all">All</button>
+            <button class="filter-pill" data-filter="Revenue">Revenue</button>
+            <button class="filter-pill" data-filter="Health">Health</button>
+            <button class="filter-pill" data-filter="Education">Education</button>
+            <button class="filter-pill" data-filter="Agriculture">Agriculture</button>
+            <button class="filter-pill" data-filter="Housing">Housing</button>
+            <button class="filter-pill" data-filter="Social Welfare">Social Welfare</button>
+          </div>
+        </div>
+
+        <!-- Cards Grid (3 columns desktop, 1 column mobile) -->
+        <div class="catalog-grid" id="all-services-grid">
+          <!-- Populated with the 13 required services -->
+        </div>
+
+        <!-- Empty state when no search results -->
+        <div class="empty-state" id="services-empty-state" style="display:none;">
+          <div class="empty-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+          <h3>No matching services found</h3>
+          <p>Try searching with another keyword or clear the department filter.</p>
+          <button class="btn-primary-orange" id="reset-services-filter">Reset Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 3: LOGIN AND REGISTER PAGE          -->
+    <!-- ========================================== -->
+    <section id="screen-auth" class="screen-view">
+      <div class="auth-page-wrapper">
+        <div class="auth-card-container">
+          <!-- Auth Header -->
+          <div class="auth-card-header">
+            <div class="auth-emblem">
+              <svg width="36" height="36" viewBox="0 0 44 44" fill="none">
+                <rect width="44" height="44" rx="10" fill="#1A3C6E"/>
+                <path d="M22 8L25.8 16.2H34.4L27.5 21.3L30.1 29.5L22 24.3L13.9 29.5L16.5 21.3L9.6 16.2H18.2L22 8Z" fill="#F97316"/>
+              </svg>
+            </div>
+            <h1 class="auth-title" id="auth-main-heading">Aaple Sarkar Portal</h1>
+            <p class="auth-subtitle">Government of Maharashtra Citizen Authentication</p>
+          </div>
+
+          <!-- Main Login Mode Toggle (Citizen Login | VLE Login) -->
+          <div class="auth-mode-toggle" id="auth-user-role-toggle">
+            <button class="mode-tab-btn active" id="tab-citizen" data-role="citizen">Citizen Login</button>
+            <button class="mode-tab-btn" id="tab-vle" data-role="vle">VLE (Kendra) Login</button>
+          </div>
+
+          <!-- Form Type Switcher: Login vs Register -->
+          <div class="form-switch-tabs">
+            <button class="switch-btn active" id="btn-show-login">Sign In</button>
+            <button class="switch-btn" id="btn-show-register">New User Registration</button>
+          </div>
+
+          <!-- LOGIN FORM -->
+          <div class="auth-form-body" id="login-form-view">
+            <form id="login-form" onsubmit="event.preventDefault(); handleLoginSubmit();">
+              <div class="form-group">
+                <label for="login-username" class="form-label">Username / Mobile No / Aadhaar</label>
+                <div class="input-with-icon">
+                  <span class="field-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  </span>
+                  <input type="text" id="login-username" class="form-control" placeholder="Enter username or registered mobile" required autocomplete="username">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="label-row">
+                  <label for="login-password" class="form-label">Password</label>
+                </div>
+                <div class="input-with-icon">
+                  <span class="field-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  </span>
+                  <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+                  <button type="button" class="password-toggle-btn" id="toggle-pwd-btn" aria-label="Toggle password visibility"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+                </div>
+              </div>
+
+              <!-- Captcha Widget Here Only (Clean & Accessible) -->
+              <div class="captcha-box-modern">
+                <div class="captcha-label-row">
+                  <span class="captcha-title">Security Verification</span>
+                  <span class="captcha-hint">Case-sensitive</span>
+                </div>
+                <div class="captcha-interactive-row">
+                  <div class="captcha-display" id="captcha-code" title="Captcha text">9 K R 4 B</div>
+                  <button type="button" class="btn-refresh-captcha" id="refresh-captcha-btn" title="Generate New Captcha">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                  </button>
+                  <input type="text" id="captcha-input" class="captcha-input" placeholder="Enter Captcha" maxlength="6" required>
+                </div>
+              </div>
+
+              <div class="form-options-row">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="remember-me" checked>
+                  <span>Remember me</span>
+                </label>
+                <button type="button" class="link-btn" id="btn-forgot-credentials">Forgot credentials?</button>
+              </div>
+
+              <button type="submit" class="btn-primary-orange btn-full-width" id="btn-submit-login">
+                <span>Sign In to Aaple Sarkar</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+
+              <div class="auth-divider">
+                <span>OR</span>
+              </div>
+
+              <button type="button" class="btn-secondary-outline btn-full-width" id="btn-switch-to-reg">
+                New User? Register Here
+              </button>
+            </form>
+          </div>
+
+          <!-- REGISTER FORM (Toggled on same page) -->
+          <div class="auth-form-body" id="register-form-view" style="display:none;">
+            <form id="register-form" onsubmit="event.preventDefault(); handleRegisterSubmit();">
+              <div class="form-grid-two">
+                <div class="form-group">
+                  <label for="reg-fullname" class="form-label">Full Name (As per Aadhaar)</label>
+                  <input type="text" id="reg-fullname" class="form-control" placeholder="e.g. Rahul Ramesh Patil" required>
+                </div>
+                <div class="form-group">
+                  <label for="reg-mobile" class="form-label">Mobile Number</label>
+                  <input type="tel" id="reg-mobile" class="form-control" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                </div>
+              </div>
+
+              <div class="form-grid-two">
+                <div class="form-group">
+                  <label for="reg-email" class="form-label">Email Address</label>
+                  <input type="email" id="reg-email" class="form-control" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="reg-district" class="form-label">District</label>
+                  <select id="reg-district" class="form-control" required>
+                    <option value="" disabled selected>Select District</option>
+                    <option value="Ahmednagar">Ahmednagar (अहमदनगर)</option>
+                    <option value="Akola">Akola (अकोला)</option>
+                    <option value="Amravati">Amravati (अमरावती)</option>
+                    <option value="Chhatrapati Sambhajinagar">Chhatrapati Sambhajinagar (छ. संभाजीनगर)</option>
+                    <option value="Kolhapur">Kolhapur (कोल्हापूर)</option>
+                    <option value="Mumbai City">Mumbai City (मुंबई शहर)</option>
+                    <option value="Mumbai Suburban">Mumbai Suburban (मुंबई उपनगर)</option>
+                    <option value="Nagpur">Nagpur (नागपूर)</option>
+                    <option value="Nashik">Nashik (नाशिक)</option>
+                    <option value="Pune">Pune (पुणे)</option>
+                    <option value="Solapur">Solapur (सोलापूर)</option>
+                    <option value="Thane">Thane (ठाणे)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="reg-aadhaar" class="form-label">Aadhaar Number (12 digits)</label>
+                <input type="text" id="reg-aadhaar" class="form-control" placeholder="XXXX-XXXX-XXXX" maxlength="14" required>
+                <span class="field-hint">Aadhaar will be verified via DigiLocker / UIDAI OTP</span>
+              </div>
+
+              <div class="form-grid-two">
+                <div class="form-group">
+                  <label for="reg-password" class="form-label">Create Password</label>
+                  <input type="password" id="reg-password" class="form-control" placeholder="Minimum 8 characters" required>
+                </div>
+                <div class="form-group">
+                  <label for="reg-confirm-password" class="form-label">Confirm Password</label>
+                  <input type="password" id="reg-confirm-password" class="form-control" placeholder="Re-enter password" required>
+                </div>
+              </div>
+
+              <div class="terms-check-box">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="reg-terms" required checked>
+                  <span>I agree to the <a href="#terms" class="inline-link">Terms of Service</a> & Maharashtra RTS Citizen Charter.</span>
+                </label>
+              </div>
+
+              <button type="submit" class="btn-primary-orange btn-full-width" id="btn-submit-register">
+                <span>Complete Citizen Registration</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+
+              <div class="auth-footer-prompt">
+                <span>Already registered?</span>
+                <button type="button" class="link-btn bold" id="btn-switch-back-login">Sign in here</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 4: TRACK APPLICATION PAGE           -->
+    <!-- ========================================== -->
+    <section id="screen-track" class="screen-view">
+      <div class="page-header-band">
+        <div class="container">
+          <div class="breadcrumbs">
+            <button class="breadcrumb-link" data-nav="home">Home</button>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">Track Application</span>
+          </div>
+          <h1 class="page-title">Track Your Application</h1>
+          <p class="page-subtitle">Enter your 15-character Maharashtra Government Application Tracking ID to inspect real-time progress.</p>
+        </div>
+      </div>
+
+      <div class="container content-page-body">
+        <div class="track-center-card">
+          <!-- Search Box -->
+          <div class="track-search-box">
+            <label for="track-app-id" class="track-input-label">Application Tracking ID</label>
+            <div class="track-input-group">
+              <input type="text" id="track-app-id" class="track-input-field" placeholder="e.g. MH2026INCOME01 or MH2026REV9948" value="MH2026INCOME01">
+              <button class="btn-primary-orange track-submit-btn" id="btn-track-submit">
+                <span>Track Now</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </button>
+            </div>
+            <div class="demo-ids-helper">
+              <span>Try test application IDs:</span>
+              <button class="demo-chip" data-id="MH2026INCOME01">MH2026INCOME01 (Approved)</button>
+              <button class="demo-chip" data-id="MH2026CASTE02">MH2026CASTE02 (Under Review)</button>
+              <button class="demo-chip" data-id="MH2026DOM03">MH2026DOM03 (Pending)</button>
+              <button class="demo-chip" data-id="MH2026SOLV04">MH2026SOLV04 (Rejected)</button>
+            </div>
+          </div>
+
+          <!-- Result Card (Shown after search) -->
+          <div class="track-result-wrapper" id="track-result-panel">
+            <div class="result-header-row">
+              <div class="result-meta-info">
+                <span class="result-id-tag" id="res-app-id">Application #MH2026INCOME01</span>
+                <h2 class="result-service-title" id="res-service-name">Income Certificate (उत्पन्न दाखला)</h2>
+              </div>
+              <div class="result-status-badge">
+                <span class="status-pill status-approved" id="res-status-badge">Approved</span>
+              </div>
+            </div>
+
+            <!-- Details Key-Value Grid -->
+            <div class="result-details-grid">
+              <div class="detail-tile">
+                <span class="detail-label">Applicant Name</span>
+                <span class="detail-value" id="res-applicant-name">Rahul Ramesh Patil</span>
+              </div>
+              <div class="detail-tile">
+                <span class="detail-label">Date of Application</span>
+                <span class="detail-value" id="res-app-date">08 Oct 2026</span>
+              </div>
+              <div class="detail-tile">
+                <span class="detail-label">District / Taluka</span>
+                <span class="detail-value" id="res-district">Pune, Haveli</span>
+              </div>
+              <div class="detail-tile">
+                <span class="detail-label">Competent Authority</span>
+                <span class="detail-value" id="res-authority">Tahsildar Office, Haveli</span>
+              </div>
+            </div>
+
+            <!-- Progress Timeline Stepper -->
+            <div class="stepper-section">
+              <h3 class="stepper-title">Application Processing Milestones</h3>
+              <div class="stepper-container" id="track-stepper-container">
+                <!-- Step 1 -->
+                <div class="stepper-step completed" id="step-node-1">
+                  <div class="step-circle">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div class="step-connector"></div>
+                  <div class="step-label-group">
+                    <span class="step-name">Step 1: Application Submitted</span>
+                    <span class="step-timestamp">08 Oct 2026, 11:20 AM</span>
+                    <span class="step-note">Documents uploaded & fee paid</span>
+                  </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="stepper-step completed" id="step-node-2">
+                  <div class="step-circle">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div class="step-connector"></div>
+                  <div class="step-label-group">
+                    <span class="step-name">Step 2: Departmental Review</span>
+                    <span class="step-timestamp">09 Oct 2026, 03:45 PM</span>
+                    <span class="step-note">Talathi verification completed</span>
+                  </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="stepper-step completed" id="step-node-3">
+                  <div class="step-circle">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div class="step-connector"></div>
+                  <div class="step-label-group">
+                    <span class="step-name">Step 3: Decision Made</span>
+                    <span class="step-timestamp">11 Oct 2026, 04:10 PM</span>
+                    <span class="step-note">Approved by Sub-Divisional Officer</span>
+                  </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="stepper-step completed" id="step-node-4">
+                  <div class="step-circle">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div class="step-label-group">
+                    <span class="step-name">Step 4: Certificate Ready</span>
+                    <span class="step-timestamp">11 Oct 2026, 05:00 PM</span>
+                    <span class="step-note">Digital Signature & QR stamped</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action footer inside result card -->
+            <div class="result-action-bar" id="track-result-actions">
+              <button class="btn-primary-orange" id="btn-track-download-cert">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Download Digitally Signed Certificate</span>
+              </button>
+              <button class="btn-secondary-outline" id="btn-track-print-receipt">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                <span>Print Application Acknowledgement</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 5: APPLICATION FORM PAGE            -->
+    <!-- ========================================== -->
+    <section id="screen-apply" class="screen-view">
+      <div class="page-header-band">
+        <div class="container">
+          <!-- Breadcrumb: Home > Services > Income Certificate > Apply -->
+          <div class="breadcrumbs">
+            <button class="breadcrumb-link" data-nav="home">Home</button>
+            <span class="breadcrumb-sep">&gt;</span>
+            <button class="breadcrumb-link" data-nav="services">Services</button>
+            <span class="breadcrumb-sep">&gt;</span>
+            <span class="breadcrumb-service-name" id="apply-breadcrumb-service">Income Certificate</span>
+            <span class="breadcrumb-sep">&gt;</span>
+            <span class="breadcrumb-current">Apply</span>
+          </div>
+
+          <div class="form-header-title-wrap">
+            <div class="service-badge-pill" id="form-dept-tag">Revenue Department</div>
+            <h1 class="page-title" id="apply-page-heading">Application for Income Certificate</h1>
+            <p class="page-subtitle">Revenue Department, Government of Maharashtra • Standard Delivery SLA: 15 Working Days</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container content-page-body">
+        <div class="apply-form-container">
+          
+          <!-- Required Documents checklist before form -->
+          <div class="checklist-card">
+            <div class="checklist-header">
+              <div class="checklist-title-group">
+                <span class="checklist-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78350F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg></span>
+                <div>
+                  <h3 class="checklist-heading">Required Documents Checklist</h3>
+                  <p class="checklist-sub">Please ensure you have valid digital copies (PDF/JPEG &lt; 2MB) before proceeding:</p>
+                </div>
+              </div>
+              <span class="checklist-mandatory-tag">All Required</span>
+            </div>
+            <div class="checklist-items-grid">
+              <label class="doc-check-item">
+                <input type="checkbox" id="chk-aadhaar" checked>
+                <div class="doc-text">
+                  <strong>Aadhaar Card</strong>
+                  <span>Proof of Identity (UIDAI Verified)</span>
+                </div>
+              </label>
+              <label class="doc-check-item">
+                <input type="checkbox" id="chk-ration" checked>
+                <div class="doc-text">
+                  <strong>Ration Card</strong>
+                  <span>Family member verification</span>
+                </div>
+              </label>
+              <label class="doc-check-item">
+                <input type="checkbox" id="chk-address" checked>
+                <div class="doc-text">
+                  <strong>Address Proof</strong>
+                  <span>Electricity Bill / Voter ID / Rent Agreement</span>
+                </div>
+              </label>
+              <label class="doc-check-item">
+                <input type="checkbox" id="chk-photo" checked>
+                <div class="doc-text">
+                  <strong>Passport Photo</strong>
+                  <span>Recent colored photograph (white background)</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- 3 Step Progress Bar (Step 1 -> Step 2 -> Step 3) -->
+          <div class="form-stepper-indicator">
+            <div class="step-indicator-item active" id="wizard-step-indicator-1">
+              <div class="step-number-circle">1</div>
+              <div class="step-text-wrap">
+                <span class="step-label-sm">Step 1</span>
+                <span class="step-label-lg">Personal Details</span>
+              </div>
+            </div>
+            <div class="step-indicator-line" id="wizard-line-1"></div>
+            <div class="step-indicator-item" id="wizard-step-indicator-2">
+              <div class="step-number-circle">2</div>
+              <div class="step-text-wrap">
+                <span class="step-label-sm">Step 2</span>
+                <span class="step-label-lg">Upload Documents</span>
+              </div>
+            </div>
+            <div class="step-indicator-line" id="wizard-line-2"></div>
+            <div class="step-indicator-item" id="wizard-step-indicator-3">
+              <div class="step-number-circle">3</div>
+              <div class="step-text-wrap">
+                <span class="step-label-sm">Step 3</span>
+                <span class="step-label-lg">Review & Submit</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multi-Step Form Wrapper -->
+          <div class="form-wizard-card">
+            
+            <!-- STEP 1 — Personal Details -->
+            <div class="wizard-step-pane active" id="pane-step-1">
+              <div class="step-pane-header">
+                <h3 class="pane-heading">Step 1 — Applicant Personal Details</h3>
+                <p class="pane-desc">Information provided must match with official government records.</p>
+              </div>
+
+              <div class="form-grid-two">
+                <div class="form-group">
+                  <label for="app-fullname" class="form-label">Full Name *</label>
+                  <input type="text" id="app-fullname" class="form-control" value="Rahul Ramesh Patil" placeholder="Full name as per Aadhaar">
+                </div>
+                <div class="form-group">
+                  <label for="app-dob" class="form-label">Date of Birth *</label>
+                  <input type="date" id="app-dob" class="form-control" value="1995-05-14">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Gender *</label>
+                <div class="radio-options-row">
+                  <label class="radio-card">
+                    <input type="radio" name="app-gender" value="Male" checked>
+                    <span>Male (पुरुष)</span>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="app-gender" value="Female">
+                    <span>Female (स्त्री)</span>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="app-gender" value="Other">
+                    <span>Other (इतर)</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-grid-two">
+                <div class="form-group">
+                  <label for="app-mobile" class="form-label">Mobile Number *</label>
+                  <input type="tel" id="app-mobile" class="form-control" value="9823012345" placeholder="10-digit mobile number">
+                </div>
+                <div class="form-group">
+                  <label for="app-email" class="form-label">Email Address *</label>
+                  <input type="email" id="app-email" class="form-control" value="rahul.patil@example.com" placeholder="Email for notifications">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="app-address" class="form-label">Residential Address *</label>
+                <textarea id="app-address" class="form-control form-textarea" rows="2" placeholder="House/Flat No., Society, Road, Area">Plot 42, Shivshambho Colony, Paud Road, Kothrud</textarea>
+              </div>
+
+              <div class="form-grid-two">
+                <div class="form-group">
+                  <label for="app-district" class="form-label">District (जिल्हा) *</label>
+                  <select id="app-district" class="form-control">
+                    <option value="Pune" selected>Pune (पुणे)</option>
+                    <option value="Mumbai City">Mumbai City (मुंबई)</option>
+                    <option value="Mumbai Suburban">Mumbai Suburban (मुंबई उपनगर)</option>
+                    <option value="Thane">Thane (ठाणे)</option>
+                    <option value="Nashik">Nashik (नाशिक)</option>
+                    <option value="Nagpur">Nagpur (नागपूर)</option>
+                    <option value="Chhatrapati Sambhajinagar">Chhatrapati Sambhajinagar</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="app-taluka" class="form-label">Taluka (तालुका) *</label>
+                  <select id="app-taluka" class="form-control">
+                    <option value="Haveli" selected>Haveli (हवेली)</option>
+                    <option value="Pune City">Pune City (पुणे शहर)</option>
+                    <option value="Maval">Maval (मावळ)</option>
+                    <option value="Mulshi">Mulshi (मुळशी)</option>
+                    <option value="Baramati">Baramati (बारामती)</option>
+                    <option value="Shirur">Shirur (शिरूर)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="wizard-nav-actions right-align">
+                <button type="button" class="btn-primary-orange btn-large" id="btn-wizard-next-1">
+                  <span>Continue to Documents</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2 — Upload Documents -->
+            <div class="wizard-step-pane" id="pane-step-2" style="display:none;">
+              <div class="step-pane-header">
+                <h3 class="pane-heading">Step 2 — Upload Supporting Documents</h3>
+                <p class="pane-desc">Upload clear scanned copies or fetch directly from DigiLocker. Supported formats: PDF, JPG, PNG (Max 2MB per file).</p>
+              </div>
+
+              <div class="document-upload-grid">
+                <!-- Doc 1: Aadhaar -->
+                <div class="upload-box-card">
+                  <div class="upload-card-header">
+                    <span class="upload-doc-title">1. Aadhaar Card (Proof of Identity) *</span>
+                    <span class="upload-badge-ready" id="badge-file-1">Ready</span>
+                  </div>
+                  <div class="drop-zone" id="dropzone-1">
+                    <input type="file" class="hidden-file-input" id="file-input-1" accept=".pdf,.jpg,.jpeg,.png">
+                    <div class="drop-zone-content">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A3C6E" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                      <span class="drop-text-primary">Drag & drop or <span class="browse-link">browse file</span></span>
+                      <span class="drop-text-sub">PDF, JPG up to 2MB • <button type="button" class="digilocker-fetch-link">Fetch from DigiLocker</button></span>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-meta" id="file-meta-1">
+                    <span class="file-meta-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3C6E" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></span>
+                    <span class="file-name" id="name-file-1">aadhaar_front_back.pdf (1.2 MB)</span>
+                    <button class="remove-file-btn" onclick="clearUpload(1)">&times;</button>
+                  </div>
+                </div>
+
+                <!-- Doc 2: Ration Card -->
+                <div class="upload-box-card">
+                  <div class="upload-card-header">
+                    <span class="upload-doc-title">2. Ration Card (Family Details) *</span>
+                    <span class="upload-badge-ready" id="badge-file-2">Ready</span>
+                  </div>
+                  <div class="drop-zone" id="dropzone-2">
+                    <input type="file" class="hidden-file-input" id="file-input-2" accept=".pdf,.jpg,.jpeg,.png">
+                    <div class="drop-zone-content">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A3C6E" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                      <span class="drop-text-primary">Drag & drop or <span class="browse-link">browse file</span></span>
+                      <span class="drop-text-sub">PDF, JPG up to 2MB</span>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-meta" id="file-meta-2">
+                    <span class="file-meta-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3C6E" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></span>
+                    <span class="file-name" id="name-file-2">ration_card_scanned.pdf (940 KB)</span>
+                    <button class="remove-file-btn" onclick="clearUpload(2)">&times;</button>
+                  </div>
+                </div>
+
+                <!-- Doc 3: Address Proof -->
+                <div class="upload-box-card">
+                  <div class="upload-card-header">
+                    <span class="upload-doc-title">3. Address Proof (Electricity / Rent) *</span>
+                    <span class="upload-badge-ready" id="badge-file-3">Ready</span>
+                  </div>
+                  <div class="drop-zone" id="dropzone-3">
+                    <input type="file" class="hidden-file-input" id="file-input-3" accept=".pdf,.jpg,.jpeg,.png">
+                    <div class="drop-zone-content">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A3C6E" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                      <span class="drop-text-primary">Drag & drop or <span class="browse-link">browse file</span></span>
+                      <span class="drop-text-sub">PDF, JPG up to 2MB</span>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-meta" id="file-meta-3">
+                    <span class="file-meta-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3C6E" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></span>
+                    <span class="file-name" id="name-file-3">mahadiscom_bill_sept.pdf (780 KB)</span>
+                    <button class="remove-file-btn" onclick="clearUpload(3)">&times;</button>
+                  </div>
+                </div>
+
+                <!-- Doc 4: Passport Photo -->
+                <div class="upload-box-card">
+                  <div class="upload-card-header">
+                    <span class="upload-doc-title">4. Passport Size Photograph *</span>
+                    <span class="upload-badge-ready" id="badge-file-4">Ready</span>
+                  </div>
+                  <div class="drop-zone" id="dropzone-4">
+                    <input type="file" class="hidden-file-input" id="file-input-4" accept=".jpg,.jpeg,.png">
+                    <div class="drop-zone-content">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A3C6E" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                      <span class="drop-text-primary">Drag & drop or <span class="browse-link">browse image</span></span>
+                      <span class="drop-text-sub">JPEG, PNG only (Max 500 KB)</span>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-meta" id="file-meta-4">
+                    <span class="file-meta-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3C6E" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>
+                    <span class="file-name" id="name-file-4">rahul_patil_photo.jpg (180 KB)</span>
+                    <button class="remove-file-btn" onclick="clearUpload(4)">&times;</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="wizard-nav-actions split-between">
+                <button type="button" class="btn-secondary-outline btn-large" id="btn-wizard-prev-2">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                  <span>Previous</span>
+                </button>
+                <button type="button" class="btn-primary-orange btn-large" id="btn-wizard-next-2">
+                  <span>Review Application</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 3 — Review and Submit -->
+            <div class="wizard-step-pane" id="pane-step-3" style="display:none;">
+              <div class="step-pane-header">
+                <h3 class="pane-heading">Step 3 — Review and Submit Application</h3>
+                <p class="pane-desc">Please verify all personal and document details before paying the statutory RTS fee (₹23.60) and submitting.</p>
+              </div>
+
+              <div class="review-summary-card">
+                <div class="review-section-heading">
+                  <h4>Applicant Summary</h4>
+                  <button type="button" class="edit-step-link" onclick="goToWizardStep(1)">Edit Details</button>
+                </div>
+                <div class="review-details-grid">
+                  <div class="rev-item">
+                    <span class="rev-label">Service:</span>
+                    <span class="rev-val font-semibold" id="rev-service-val">Income Certificate (महसूल विभाग)</span>
+                  </div>
+                  <div class="rev-item">
+                    <span class="rev-label">Applicant Name:</span>
+                    <span class="rev-val" id="rev-name-val">Rahul Ramesh Patil</span>
+                  </div>
+                  <div class="rev-item">
+                    <span class="rev-label">Date of Birth / Gender:</span>
+                    <span class="rev-val" id="rev-dob-val">14 May 1995 (Male)</span>
+                  </div>
+                  <div class="rev-item">
+                    <span class="rev-label">Mobile & Email:</span>
+                    <span class="rev-val" id="rev-contact-val">9823012345 / rahul.patil@example.com</span>
+                  </div>
+                  <div class="rev-item">
+                    <span class="rev-label">Jurisdiction:</span>
+                    <span class="rev-val" id="rev-jurisdiction-val">Pune District, Haveli Taluka</span>
+                  </div>
+                  <div class="rev-item">
+                    <span class="rev-label">Delivery SLA:</span>
+                    <span class="rev-val text-success">Within 15 Working Days (RTS Mandate)</span>
+                  </div>
+                </div>
+
+                <div class="review-section-heading mt-4">
+                  <h4>Attached Documents</h4>
+                  <button type="button" class="edit-step-link" onclick="goToWizardStep(2)">Edit Documents</button>
+                </div>
+                <div class="doc-chips-row">
+                  <span class="doc-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Aadhaar Card (DigiLocker Verified)</span>
+                  <span class="doc-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Ration Card</span>
+                  <span class="doc-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Address Proof</span>
+                  <span class="doc-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Passport Photo</span>
+                </div>
+
+                <div class="statutory-fee-box">
+                  <div class="fee-row">
+                    <span>Government Processing Fee:</span>
+                    <span>₹20.00</span>
+                  </div>
+                  <div class="fee-row">
+                    <span>GST (18%):</span>
+                    <span>₹3.60</span>
+                  </div>
+                  <div class="fee-row total">
+                    <span>Total Amount Payable:</span>
+                    <span>₹23.60</span>
+                  </div>
+                </div>
+
+                <div class="declaration-checkbox">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="self-declaration" checked>
+                    <span>I hereby declare that the information provided is true and correct to the best of my knowledge under Section 199 of IPC.</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="wizard-nav-actions split-between">
+                <button type="button" class="btn-secondary-outline btn-large" id="btn-wizard-prev-3">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                  <span>Previous</span>
+                </button>
+                <button type="button" class="btn-primary-orange btn-large" id="btn-wizard-submit">
+                  <span id="submit-btn-text">Confirm and Submit Application</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Confirmation screen (Hidden initially, shown after submit) -->
+            <div class="wizard-confirmation-pane" id="pane-confirmation" style="display:none;">
+              <div class="confirm-icon-wrap">
+                <div class="pulse-ring"></div>
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h2 class="confirm-title">Application Submitted Successfully!</h2>
+              <p class="confirm-desc">Your certificate request has been recorded with the Department of Revenue, Government of Maharashtra.</p>
+
+              <div class="confirm-id-card">
+                <span class="confirm-id-label">Official Application Tracking ID</span>
+                <span class="confirm-id-number" id="generated-app-id">MH202684920412</span>
+                <span class="confirm-copy-hint">Save this ID to track your application or receive SMS updates.</span>
+              </div>
+
+              <div class="confirm-meta-grid">
+                <div class="confirm-meta-item">
+                  <span>Application Date</span>
+                  <strong>12 Oct 2026</strong>
+                </div>
+                <div class="confirm-meta-item">
+                  <span>Expected Delivery</span>
+                  <strong>27 Oct 2026 (15 Days)</strong>
+                </div>
+                <div class="confirm-meta-item">
+                  <span>Payment Status</span>
+                  <strong class="text-success">Paid (₹23.60)</strong>
+                </div>
+              </div>
+
+              <div class="confirm-action-buttons">
+                <button class="btn-primary-orange btn-large" id="btn-download-receipt">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span>Download Receipt (PDF)</span>
+                </button>
+                <button class="btn-secondary-outline btn-large" id="btn-confirm-track-app">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  <span>Track Status Now</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 6: HELP AND FAQ PAGE                -->
+    <!-- ========================================== -->
+    <section id="screen-faq" class="screen-view">
+      <div class="page-header-band">
+        <div class="container">
+          <div class="breadcrumbs">
+            <button class="breadcrumb-link" data-nav="home">Home</button>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">Help & Support</span>
+          </div>
+          <h1 class="page-title">Help & Support</h1>
+          <p class="page-subtitle">Frequently asked questions, application guidance, and official Maharashtra citizen helpline.</p>
+        </div>
+      </div>
+
+      <div class="container content-page-body">
+        <div class="faq-layout-grid">
+          
+          <!-- Left Column: Accordion FAQ Sections -->
+          <div class="faq-main-column">
+            <!-- Search FAQ -->
+            <div class="faq-search-wrapper">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="faq-search-input" class="faq-search-input" placeholder="Search questions eg. certificate validity, login OTP, DigiLocker...">
+            </div>
+
+            <!-- Category: General Questions -->
+            <div class="faq-category-block" data-category="general">
+              <h3 class="faq-category-heading">1. General Questions</h3>
+              <div class="accordion-group">
+                <div class="accordion-item active">
+                  <button class="accordion-header" aria-expanded="true">
+                    <span>What is Aaple Sarkar and how does RTS benefit citizens?</span>
+                    <span class="accordion-chevron">▾</span>
+                  </button>
+                  <div class="accordion-content">
+                    <p>Aaple Sarkar (आपले सरकार) is the official public service delivery portal initiated by the Government of Maharashtra under the Maharashtra Right to Public Services Act (RTS), 2015. It guarantees transparent, efficient, and time-bound delivery of essential citizen certificates and licenses without physical office visits.</p>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <button class="accordion-header" aria-expanded="false">
+                    <span>Are certificates issued on Aaple Sarkar legally valid everywhere?</span>
+                    <span class="accordion-chevron">▾</span>
+                  </button>
+                  <div class="accordion-content">
+                    <p>Yes. All certificates downloaded through Aaple Sarkar carry a secure digital signature (e-Sign) from the designated competent authority along with a tamper-proof QR code. According to the IT Act 2000, they are 100% legally recognized across all institutions, colleges, banks, and courts in India without physical gazetted attestation.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Category: Login and Registration -->
+            <div class="faq-category-block" data-category="auth">
+              <h3 class="faq-category-heading">2. Login and Registration</h3>
+              <div class="accordion-group">
+                <div class="accordion-item">
+                  <button class="accordion-header" aria-expanded="false">
+                    <span>How do I create a new citizen account?</span>
+                    <span class="accordion-chevron">▾</span>
+                  </button>
+                  <div class="accordion-content">
+                    <p>Click on <strong>Citizen Login</strong> in the header and toggle to <strong>New User Registration</strong>. Provide your full name, mobile number, district, and 12-digit Aadhaar number. A verification OTP will be sent to your Aadhaar-linked mobile to activate your account in under 2 minutes.</p>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <button class="accordion-header" aria-expanded="false">
+                    <span>What should I do if I forget my login credentials?</span>
+                    <span class="accordion-chevron">▾</span>
+                  </button>
+                  <div class="accordion-content">
+                    <p>On the Login page, click the single <strong>"Forgot credentials?"</strong> link. You can reset your password or recover your username instantly by entering your registered 10-digit mobile number or Aadhaar number via an SMS OTP verification.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Category: Application Process -->
+            <div class="faq-category-block" data-category="process">
+              <h3 class="faq-category-heading">3. Application Process</h3>
+              <div class="accordion-group">
+                <div class="accordion-item">
+                  <button class="accordion-header" aria-expanded="false">
+                    <span>What is the standard turnaround time for services?</span>
+                    <span class="accordion-chevron">▾</span>
+                  </button>
+                  <div class="accordion-content">
+                    <p>Under the Right to Services (RTS) Act, every service has an enforceable SLA. For example, an Income Certificate is issued within 15 days, Domicile Certificate within 15 days, and Senior Citizen Certificate within 7 days. If a service is delayed, citizens can submit an online RTS First Appeal directly from their dashboard.</p>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <button class="accordion-header" aria-expanded="false">
+                    <span>Can I edit my application after submission?</span>
+                    <span class="accordion-chevron">▾</span>
+                  </button>
+                  <div class="accordion-content">
+                    <p>Once submitted, an application cannot be modified unless the scrutinizing department officer sends a "Query / Clarification Request". If an officer requests additional documentation, you will receive an SMS and a re-upload link will become active on your tracking page.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Category: Document Requirements -->
+            <div class="faq-category-block" data-category="documents">
+              <h3 class="faq-category-heading">4. Document Requirements</h3>
+              <div class="accordion-group">
+                <div class="accordion-item">
+                  <button class="accordion-header" aria-expanded="false">
+                    <span>What formats and file sizes are supported for uploads?</span>
+                    <span class="accordion-chevron">▾</span>
+                  </button>
+                  <div class="accordion-content">
+                    <p>Supporting documents can be uploaded in PDF, JPG, JPEG, or PNG format. Each document file size must be less than 2MB. Photograph size should be between 20KB and 500KB. Alternatively, you can use the <strong>Fetch from DigiLocker</strong> option to import verified documents directly with zero upload friction.</p>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <button class="accordion-header" aria-expanded="false">
+                    <span>Is physical verification required for any certificate?</span>
+                    <span class="accordion-chevron">▾</span>
+                  </button>
+                  <div class="accordion-content">
+                    <p>In most standard cases (income, domicile, farmer certificate), the process is completely faceless and digital. Only in complex land verification or contested caste scrutiny cases may a desk officer request an in-person meeting with original documents.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Category: Certificate Download -->
+            <div class="faq-category-block" data-category="download">
+              <h3 class="faq-category-heading">5. Certificate Download</h3>
+              <div class="accordion-group">
+                <div class="accordion-item">
+                  <button class="accordion-header" aria-expanded="false">
+                    <span>Where can I download my approved certificate?</span>
+                    <span class="accordion-chevron">▾</span>
+                  </button>
+                  <div class="accordion-content">
+                    <p>You can download your certificate in two ways:
+                    <br>1. Go to the <strong>Track Application</strong> page, enter your Application ID, and click <strong>Download Digitally Signed Certificate</strong>.
+                    <br>2. Sign in to your citizen account and access your personal <strong>Citizen Locker</strong> tab where all historical certificates are saved forever.</p>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <button class="accordion-header" aria-expanded="false">
+                    <span>How can any third party verify the authenticity of my certificate?</span>
+                    <span class="accordion-chevron">▾</span>
+                  </button>
+                  <div class="accordion-content">
+                    <p>Every generated certificate features a 2D QR Code and a 16-character Barcode. Anyone can scan the QR code with any smartphone camera to open the official Maharashtra Government verification portal showing authentic issue records.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Contact Support Card -->
+          <div class="faq-sidebar-column">
+            <div class="contact-support-card">
+              <div class="support-card-badge">Citizen Helpdesk</div>
+              <h3 class="support-card-title">Need Immediate Assistance?</h3>
+              <p class="support-card-desc">Our dedicated Maharashtra citizen support officers are available to assist you with any queries or grievances.</p>
+
+              <div class="support-contacts-list">
+                <a href="tel:18001208040" class="contact-item">
+                  <div class="contact-icon icon-phone">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  </div>
+                  <div class="contact-details">
+                    <span class="contact-label">Toll Free Helpline</span>
+                    <span class="contact-value">1800-120-8040</span>
+                  </div>
+                </a>
+
+                <a href="mailto:support@aaplesarkar.gov.in" class="contact-item">
+                  <div class="contact-icon icon-mail">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  </div>
+                  <div class="contact-details">
+                    <span class="contact-label">Email Support</span>
+                    <span class="contact-value">support@aaplesarkar.gov.in</span>
+                  </div>
+                </a>
+
+                <div class="contact-item no-link">
+                  <div class="contact-icon icon-clock">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  </div>
+                  <div class="contact-details">
+                    <span class="contact-label">Operational Hours</span>
+                    <span class="contact-value">Monday to Saturday, 9AM to 6PM</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="support-feedback-box">
+                <span class="feedback-prompt">Have feedback or an escalated grievance?</span>
+                <button class="btn-secondary-outline btn-full-width" onclick="showToast('Grievance Redressal Portal opened in a new ticket.', 'info')">Register Online Grievance</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODERN CLEAN FOOTER                        -->
+  <!-- ========================================== -->
+  <footer class="main-footer">
+    <div class="container footer-content-grid">
+      <!-- Left: Logo + Tagline -->
+      <div class="footer-col-brand">
+        <div class="footer-brand">
+          <div class="brand-emblem small">
+            <svg viewBox="0 0 44 44" fill="none" width="32" height="32">
+              <rect width="44" height="44" rx="8" fill="#FFFFFF"/>
+              <path d="M22 8L25.8 16.2H34.4L27.5 21.3L30.1 29.5L22 24.3L13.9 29.5L16.5 21.3L9.6 16.2H18.2L22 8Z" fill="#F97316"/>
+              <circle cx="22" cy="22" r="4.5" fill="#1A3C6E"/>
+            </svg>
+          </div>
+          <span class="footer-brand-title">आपले सरकार | Aaple Sarkar</span>
+        </div>
+        <p class="footer-tagline">
+          Empowering citizens of Maharashtra through seamless, transparent, and paperless public service delivery under the Maharashtra Right to Public Services Act, 2015.
+        </p>
+        <div class="gov-official-seal">
+          <span class="seal-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path></svg></span>
+          <span>Official Portal • Government of Maharashtra</span>
+        </div>
+      </div>
+
+      <!-- Center: Quick Links -->
+      <div class="footer-col-links">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-link-list">
+          <li><button class="footer-link" data-nav="home">Home Portal</button></li>
+          <li><button class="footer-link" data-nav="services">All Public Services</button></li>
+          <li><button class="footer-link" data-nav="track">Track Application Status</button></li>
+          <li><button class="footer-link" data-nav="auth">Citizen Login / Registration</button></li>
+          <li><button class="footer-link" data-nav="faq">Right to Services (RTS) Act</button></li>
+          <li><button class="footer-link" data-nav="faq">Help & Support</button></li>
+        </ul>
+      </div>
+
+      <!-- Center 2: Top Departments -->
+      <div class="footer-col-links">
+        <h4 class="footer-heading">Key Departments</h4>
+        <ul class="footer-link-list">
+          <li><button class="footer-link" onclick="filterServicesFromFooter('Revenue')">Revenue Department (महसूल)</button></li>
+          <li><button class="footer-link" onclick="filterServicesFromFooter('Social Welfare')">Social Welfare (सामाजिक न्याय)</button></li>
+          <li><button class="footer-link" onclick="filterServicesFromFooter('Agriculture')">Agriculture Department (कृषी)</button></li>
+          <li><button class="footer-link" onclick="filterServicesFromFooter('Health')">Public Health (आरोग्य)</button></li>
+          <li><button class="footer-link" onclick="filterServicesFromFooter('Education')">School Education (शिक्षण)</button></li>
+          <li><button class="footer-link" onclick="filterServicesFromFooter('Housing')">Housing & Town Planning</button></li>
+        </ul>
+      </div>
+
+      <!-- Right: App Download Badges -->
+      <div class="footer-col-apps">
+        <h4 class="footer-heading">Mobile Application</h4>
+        <p class="footer-app-desc">Access citizen services on the move with the official Aaple Sarkar mobile app.</p>
+        
+        <div class="app-badges-stack">
+          <!-- Google Play Badge -->
+          <a href="#playstore" class="app-store-badge" onclick="event.preventDefault(); showToast('Redirecting to Google Play Store...', 'info');">
+            <svg class="app-icon-svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+              <path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.19 12 3.84 21.85C3.34 21.61 3 21.09 3 20.5Z" fill="#2196F3"/>
+              <path d="M16.81 8.38L4.67 1.45C4.38 1.28 4.07 1.21 3.84 1.25L13.19 12L16.81 8.38Z" fill="#4CAF50"/>
+              <path d="M13.19 12L3.84 22.75C4.07 22.79 4.38 22.72 4.67 22.55L16.81 15.62L13.19 12Z" fill="#F44336"/>
+              <path d="M20.16 10.31L16.81 8.38L13.19 12L16.81 15.62L20.16 13.69C21.28 13.05 21.28 11 20.16 10.31Z" fill="#FFEB3B"/>
+            </svg>
+            <div class="badge-text-group">
+              <span class="badge-small">GET IT ON</span>
+              <span class="badge-large">Google Play</span>
+            </div>
+          </a>
+
+          <!-- App Store Badge -->
+          <a href="#appstore" class="app-store-badge" onclick="event.preventDefault(); showToast('Redirecting to Apple App Store...', 'info');">
+            <svg class="app-icon-svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.77 1.06-1.85.94-2.93-.93.04-2.02.63-2.67 1.4-.58.67-1.08 1.76-.94 2.82 1.03.08 2.05-.53 2.67-1.29z"/>
+            </svg>
+            <div class="badge-text-group">
+              <span class="badge-small">Download on the</span>
+              <span class="badge-large">App Store</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar: Copyright 2026 | Disclaimer | Sitemap | Help -->
+    <div class="footer-bottom-bar">
+      <div class="container footer-bottom-inner">
+        <p class="copyright-text">
+          © Copyright 2026 Government of Maharashtra. All Rights Reserved.
+        </p>
+        <div class="footer-legal-links">
+          <a href="#disclaimer" class="legal-link" onclick="event.preventDefault(); showToast('Disclaimer: Information provided is protected under IT Act 2000.', 'info');">Disclaimer</a>
+          <span class="legal-sep">•</span>
+          <a href="#privacy" class="legal-link" onclick="event.preventDefault(); showToast('Citizen Privacy Policy: Your data is secure & encrypted.', 'info');">Privacy Policy</a>
+          <span class="legal-sep">•</span>
+          <a href="#sitemap" class="legal-link" onclick="event.preventDefault(); showToast('Viewing portal sitemap.', 'info');">Sitemap</a>
+          <span class="legal-sep">•</span>
+          <button class="legal-link-btn" data-nav="faq">Help & FAQ</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Single Forgot Credentials Modal (Clean replacement for two separate ugly buttons) -->
+  <div class="modal-backdrop" id="forgot-modal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Recover Credentials</h3>
+        <button class="modal-close-btn" id="close-forgot-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-text">Enter your registered Mobile Number or 12-digit Aadhaar to reset your password or recover your username via OTP.</p>
+        <div class="form-group">
+          <label class="form-label" for="recover-input">Registered Mobile Number / Aadhaar</label>
+          <input type="text" id="recover-input" class="form-control" placeholder="10-digit mobile or 12-digit Aadhaar">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary-outline" id="cancel-forgot-modal">Cancel</button>
+        <button class="btn-primary-orange" id="submit-forgot-modal">Send Recovery OTP</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
