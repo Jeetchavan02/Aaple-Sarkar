@@ -1,283 +1,157 @@
-\documentclass[12pt,a4paper]{report}
+\documentclass[10pt,a4paper]{article}
+
 \usepackage[utf8]{inputenc}
-\usepackage[margin=1in]{geometry}
+\usepackage[a4paper,margin=0.65in]{geometry}
 \usepackage{titlesec}
 \usepackage{amsmath,amssymb}
-\usepackage{booktabs}
-\usepackage{tabularx}
-\usepackage{graphicx}
+\usepackage{booktabs,tabularx}
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 \usepackage{setspace}
 
-% Typography & Spacing
-\setstretch{1.15}
-
-% Custom Theme Colors
 \definecolor{primaryblue}{HTML}{1A3C6E}
 \definecolor{accentorange}{HTML}{F97316}
 \definecolor{darkgray}{HTML}{1E293B}
-
-\hypersetup{
-    colorlinks=true,
-    linkcolor=primaryblue,
-    urlcolor=primaryblue,
-    citecolor=primaryblue
-}
-
-% Header and Footer setup
+\hypersetup{colorlinks=true,linkcolor=primaryblue,urlcolor=primaryblue,citecolor=primaryblue}
+\setstretch{1.0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlist{nosep,leftmargin=1.2em}
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{darkgray}}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{7pt}{3pt}
+\titlespacing*{\subsection}{0pt}{5pt}{2pt}
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{\textcolor{primaryblue}{\textbf{HMI Project: Screen Complexity Redesign}}}
 \lhead{\textcolor{darkgray}{Aaple Sarkar Portal Redesign}}
-\rfoot{Page \thepage}
+\rhead{\textcolor{primaryblue}{HMI Project}}
+\cfoot{\thepage}
+\setcounter{secnumdepth}{2}
 
 \begin{document}
 
-% =============================================================================
-% TITLE PAGE (Formatted exactly like your project report standard)
-% =============================================================================
-\begin{titlepage}
-    \centering
-    \vspace*{0.5cm}
-    
-    {\Huge \textbf{\textcolor{primaryblue}{AAPLE SARKAR 2.0}}}\\[0.4cm]
-    {\Large \textbf{Maharashtra Citizen Public Services Portal}}\\[0.3cm]
-    {\large \textit{Redesigning Graphical User Interface to Minimize Screen Complexity and Cognitive Entropy}}\\[0.8cm]
-    
-    \noindent\rule{0.85\textwidth}{1.2pt}\\[0.6cm]
-    
-    {\LARGE \textbf{Human-Machine Interaction (HMI)}}\\[0.3cm]
-    {\large \textbf{Project / Practical 8 Report}}\\[0.6cm]
-    
-    \noindent\rule{0.85\textwidth}{1.2pt}\\[0.8cm]
-    
-    {\large \textbf{Project Approach}}\\[0.2cm]
-    {\large \textbf{Goal-Directed Design (GDD) \& Tullis Complexity Reduction}}\\[1.2cm]
-    
-    {\large \textbf{Submitted By}}\\[0.4cm]
-    
-    \begin{center}
-    \begin{tabular}{ll}
-        \textbf{Sanika Lobo}      & \textbf{10613 -- Team Leader} \\[0.2cm]
-        \textbf{Meet Mangaonkar}  & \textbf{10616} \\[0.2cm]
-        \textbf{Yash Masaye}      & \textbf{10617} \\[0.2cm]
-        \textbf{Jeet Chavan}      & \textbf{10584} \\
-    \end{tabular}
-    \end{center}
-    
-    \vfill
-    
-    {\large \textbf{Department of Computer Engineering}}\\[0.2cm]
-    {\large \textbf{Fr. Concei\c{c}\~ao Rodrigues College of Engineering}}\\[0.3cm]
-    {\normalsize Academic Year 2024--25 / 2026}\\[0.1cm]
-    {\normalsize Semester VI / VIII}
-    
-    \vspace*{0.5cm}
-\end{titlepage}
+\begin{center}
+{\LARGE\bfseries\color{primaryblue} AAPLE SARKAR 2.0}\\[2pt]
+{\large\bfseries Maharashtra Citizen Public Services Portal}\\[4pt]
+{\normalsize Redesigning the GUI to Minimize Screen Complexity and Cognitive Entropy}\\[6pt]
+\rule{0.9\textwidth}{1pt}\\[5pt]
+{\large\bfseries Human-Machine Interaction (HMI)}\\
+{\normalsize Project / Practical 8 Report}\\[5pt]
+{\small \textbf{Approach:} Goal-Directed Design (GDD) and Tullis Complexity Reduction}\\[6pt]
+\textbf{Submitted by}\\
+Sanika Lobo (10613 -- Team Leader) \quad Meet Mangaonkar (10616)\\
+Yash Masaye (10617) \quad Jeet Chavan (10584)\\[4pt]
+\textbf{Department of Computer Engineering}\\
+Fr. Concei\c{c}\~ao Rodrigues College of Engineering\\
+Academic Year 2026 \quad | \quad Semester V
+\rule{0.9\textwidth}{0.6pt}
+\end{center}
 
-% =============================================================================
-% TABLE OF CONTENTS & ABSTRACT
-% =============================================================================
-\newpage
-\pagenumbering{roman}
+\section*{Abstract}
+The Aaple Sarkar portal (\url{https://aaplesarkar.mahaonline.gov.in}) provides Maharashtra citizens access to statutory services such as Income, Caste, Domicile and Solvency certificates under the Right to Public Services (RTS) Act, 2015. Its interface presents usability issues including multiple navigation bars, oversized banners, early CAPTCHA placement, moving notices and a dense collection of links. This project evaluates the interface using screen-complexity concepts and proposes a six-screen redesign based on Goal-Directed Design, progressive disclosure and clear feedback. The reported comparison reduces alignment lines from 73 to 14 (80.8\%), visual elements from 148 to 34 (77.0\%), and estimated visual search time from 3.42 to 0.94 seconds (72.5\%).
 
-\begin{abstract}
-The Aaple Sarkar portal (\texttt{aaplesarkar.mahaonline.gov.in}) is the primary digital gateway for citizens of Maharashtra to procure statutory certificates such as Income, Caste, Domicile, and Solvency certificates under the Maharashtra Right to Public Services (RTS) Act, 2015. However, the existing interface exhibits critical usability deficiencies, including triple-stacked navigation bars, arbitrary banner real-estate consumption, non-contextual CAPTCHA placement, rapid auto-scrolling marquees, and zero white space. In this project, we conduct an exhaustive Human-Machine Interaction (HMI) analysis. Utilizing Tullis's Model of Screen Complexity and Bonsiepe's Information Entropy Metric, we mathematically compute the spatial and alignment complexity of the existing interface. We then engineer a comprehensive 6-screen redesign adhering to Goal-Directed Design (GDD), Progressive Disclosure, and Norman's Feedback Principles. The resulting system achieves an \textbf{80.8\% reduction in visual alignment complexity} (from 73 alignment lines down to 14) and an estimated \textbf{72.5\% decrease in visual search time}, proving that modern minimalist ergonomics dramatically reduce citizen cognitive load.
-\end{abstract}
+\section{Introduction and Contextual Inquiry}
+Government-to-Citizen (G2C) portals must serve users with different levels of digital literacy and devices. Although Aaple Sarkar supports access to important government services, the interface can make service discovery and application submission unnecessarily difficult.
 
-\vspace{0.8cm}
-\tableofcontents
-\newpage
-
-\pagenumbering{arabic}
-\setcounter{page}{1}
-
-% =============================================================================
-% CHAPTER 1: INTRODUCTION & CONTEXTUAL INQUIRY
-% =============================================================================
-\chapter{Introduction and Contextual Inquiry}
-
-\section{Background \& Motivation}
-Government-to-Citizen (G2C) portals must cater to a vast demographic spectrum ranging from digitally literate urban applicants to rural citizens operating on low-bandwidth devices. The Maharashtra State Government launched the \textit{Aaple Sarkar} portal under the Right to Public Services (RTS) Act to guarantee timely and transparent delivery of essential certificates.
-
-Despite its policy success, the front-end graphical user interface suffers from severe cognitive disorganization that obstructs swift service discovery and application submission.
-
-\section{Contextual Inquiry of Existing Portal}
-A systematic evaluation of the live portal (\texttt{aaplesarkar.mahaonline.gov.in}) revealed the following critical ergonomics and HMI flaws:
-
-\begin{enumerate}[leftmargin=1.2cm]
-    \item \textbf{Navigation Layer Redundancy:} 3 separate navigation bars are stacked on top of each other containing duplicate logos, redundant breadcrumbs, and confusing sub-menus.
-    \item \textbf{Disproportionate Above-The-Fold Real Estate Allocation:} Over 45\% of the primary viewport is consumed by non-interactive dignitary photographs and image carousels, forcing core services below the fold.
-    \item \textbf{Premature Security Friction:} Mandatory security CAPTCHA widgets are forced onto passive homepage visitors before any user intent or service selection has occurred.
-    \item \textbf{Chaotic 3-Column Asymmetry:} Competing lateral sidebars with unaligned visual weights. An auto-scrolling ticker list violates the HMI principle of User Control by continuously moving text before it can be read.
-    \item \textbf{Absence of Visual Chunking:} Violates Miller's Law ($7 \pm 2$). The homepage presents more than 48 raw un-chunked links, producing severe visual search fatigue and cognitive paralysis.
-    \item \textbf{Fragmented Authentication:} Separate and unstyled ``Forgot Password'' and ``Forgot Username'' buttons clutter the right sidebar.
-    \item \textbf{Obsolete Technical Artifacts:} Legacy notices such as ``Best viewed in Internet Explorer'' and HTML/CSS validation badges create unnecessary visual noise.
+\textbf{Observed usability issues}
+\begin{enumerate}
+\item \textbf{Navigation redundancy:} three stacked navigation bars, repeated logos and confusing menus.
+\item \textbf{Poor use of screen space:} large banners and photographs push important services below the fold.
+\item \textbf{Premature CAPTCHA:} security verification appears before a user chooses a service or begins authentication.
+\item \textbf{Visual competition:} uneven sidebars and auto-scrolling notices compete for attention and reduce user control.
+\item \textbf{Weak grouping:} more than 48 links appear without clear categories, increasing visual search effort.
+\item \textbf{Fragmented account recovery:} separate recovery options and legacy notices add clutter.
 \end{enumerate}
 
-% =============================================================================
-% CHAPTER 2: THEORETICAL FORMULATION OF SCREEN COMPLEXITY
-% =============================================================================
-\chapter{Screen Complexity Measurement Models}
+\section{Screen Complexity Models}
+\textbf{Information entropy.} A visual-disorder measure can be expressed as
+\[
+C=-N\sum_{i=1}^{k}p_i\log_2(p_i), \qquad p_i=\frac{n_i}{N}
+\]
+where \(N\) is the number of interface elements, \(k\) is the number of alignment coordinates, and \(n_i\) is the number of elements sharing coordinate \(i\). The probabilities \(p_i\) describe how elements are distributed across alignments.
 
-In Human-Machine Interaction, screen complexity is quantitatively measured using spatial distribution models and information entropy theory.
+\textbf{Tullis alignment complexity.} Alignment complexity is represented as
+\[
+C_{\mathrm{alignment}}=C_h+C_v
+\]
+where \(C_h\) and \(C_v\) are the numbers of distinct horizontal and vertical alignment starting points. A simplified visual-search estimate is
+\[
+T\approx k_1+k_2\log_2(N)+k_3(C_h+C_v)
+\]
+where the constants depend on the measurement method. Fewer elements and consistent alignment are expected to reduce the effort required to locate controls.
 
-\section{Bonsiepe's Information Entropy Metric}
-Bonsiepe (1968) formulated screen visual disorder by adapting Shannon's Information Theory. The visual layout complexity $C$ is computed as:
+\section{Before-and-After Evaluation}
+The following figures are the project's reported estimates for the existing and redesigned interfaces.
 
-\begin{equation}
-    C = -N \sum_{i=1}^{k} p_i \log_2 (p_i)
-\end{equation}
-
-Where:
-\begin{itemize}
-    \item $N$: Total number of graphical elements (inputs, labels, icons, buttons).
-    \item $k$: Number of distinct alignment coordinates (horizontal or vertical starting points).
-    \item $p_i$: Probability of an element coinciding with alignment line $i$, given by:
-    \begin{equation}
-        p_i = \frac{n_i}{N}
-    \end{equation}
-    with $n_i$ representing the count of items sharing that particular alignment axis.
-\end{itemize}
-
-\section{Tullis's Alignment Complexity Model}
-Tullis (1983, 1988) demonstrated that visual search time is directly proportional to the number of starting points an eye must saccade across. Layout complexity is expressed as:
-
-\begin{equation}
-    \text{Alignment Complexity} = C_h + C_v
-\end{equation}
-
-Where:
-\begin{itemize}
-    \item $C_h$: Number of unique horizontal alignment baselines.
-    \item $C_v$: Number of unique vertical starting coordinates.
-\end{itemize}
-
-The visual search time $T$ (in seconds) required for a user to locate a specific target control is estimated as:
-\begin{equation}
-    T \approx k_1 + k_2 \log_2(N) + k_3 (C_h + C_v)
-\end{equation}
-Where $k_1, k_2, k_3$ are empirically derived ergonomic constants ($k_1 \approx 0.35, k_2 \approx 0.28, k_3 \approx 0.038$).
-
-% =============================================================================
-% CHAPTER 3: QUANTITATIVE EVALUATION & RESULTS
-% =============================================================================
-\chapter{Quantitative Complexity Computation: Before vs. After}
-
-A rigorous spatial audit of both the existing portal and our redesigned system produced the comparative findings shown below.
-
-\section{Empirical Complexity Comparison}
-
-\begin{table}[h!]
-\centering
-\caption{Empirical Screen Complexity Computation}
-\vspace{0.3cm}
-\begin{tabularx}{\textwidth}{|X|c|c|c|}
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|c|c|c|}
 \hline
-\textbf{Evaluation Metric} & \textbf{Existing Portal UI} & \textbf{Redesigned UI} & \textbf{\% Reduction} \\
+\textbf{Metric} & \textbf{Existing} & \textbf{Redesign} & \textbf{Change}\\
 \hline
-Total Visual Elements ($N$) & 148 & 34 & \textbf{77.0\% reduction} \\
-Vertical Alignment Lines ($C_v$) & 31 & 6 & \textbf{80.6\% reduction} \\
-Horizontal Alignment Lines ($C_h$) & 42 & 8 & \textbf{80.9\% reduction} \\
-\textbf{Total Alignment Complexity ($C_h + C_v$)} & \textbf{73} & \textbf{14} & \textbf{80.8\% reduction} \\
-Tullis Estimated Visual Search Time ($T$) & $\approx 3.42$ sec & $\approx 0.94$ sec & \textbf{72.5\% faster} \\
-Navigation Ribbon Tiers & 3 tiers & 1 sticky header & \textbf{66.7\% reduction} \\
-Homepage Decision Choices (Hick's Law) & 48 raw links & 5 actions + 1 search & \textbf{87.5\% reduction} \\
+Total visual elements & 148 & 34 & 77.0\% fewer\\
+\hline
+Vertical alignment lines ($C_v$) & 31 & 6 & 80.6\% fewer\\
+\hline
+Horizontal alignment lines ($C_h$) & 42 & 8 & 80.9\% fewer\\
+\hline
+Total alignment complexity & 73 & 14 & 80.8\% lower\\
+\hline
+Estimated visual search time & 3.42 s & 0.94 s & 72.5\% lower\\
+\hline
+Navigation tiers & 3 & 1 sticky header & 66.7\% fewer\\
+\hline
+Homepage choices & 48 links & 5 actions + search & 87.5\% fewer links\\
 \hline
 \end{tabularx}
-\end{table}
+\end{center}
 
-\section{Analysis of Mathematical Findings}
+The proposed layout uses a consistent grid, more whitespace and grouped service cards. Decorative photographs, animated tickers, duplicated seals and legacy badges are removed. These changes are intended to create a clearer scan path and reduce competing visual targets. The search-time values are model-based estimates, not results of a controlled user study.
+
+\section{Redesigned Interface: Six Task-Focused Screens}
+The redesign separates the portal into screens organized around citizens' main tasks.
+
+\textbf{1. Homepage}
 \begin{itemize}
-    \item \textbf{Alignment Line Reduction (73 $\rightarrow$ 14):} By adopting a strict 12-column responsive grid with 80px rhythmic section gaps, the eye follows a continuous, uninterrupted vertical scanpath.
-    \item \textbf{Element Density Reduction (148 $\rightarrow$ 34):} Extraneous minister photographs, animated tickers, duplicate seals, and validator badges were completely eliminated.
-    \item \textbf{Visual Search Time (3.42s $\rightarrow$ 0.94s):} Users locate their desired service card or tracking bar more than 3.5 times faster.
+\item One sticky header with the Aaple Sarkar emblem, Home, Services, Track, Help \& FAQ, Contact and Citizen Login.
+\item Deep-blue hero area with a prominent service-search field, saffron action button and popular-service shortcuts.
+\item Three quick-action cards: Apply for Service, Track Application and Download Certificate.
+\item Department filters and a responsive service-card grid; a compact strip highlights Aadhaar integration, DigiLocker, PayGov and digital signatures.
 \end{itemize}
 
-% =============================================================================
-% CHAPTER 4: REDESIGNED ARCHITECTURE: 6 COHESIVE SCREENS
-% =============================================================================
-\chapter{Redesigned Interface Architecture}
+\textbf{2. All Services Catalog}\\
+A searchable, filterable catalog groups the 13 proposed essential services: Income, Caste, Age/Nationality/Domicile, Senior Citizen, Solvency, Non-Creamy Layer, Landless, General Affidavit, Certified Copy (7/12), Agriculturist, Cultural Programme Permission, Small Land Holder and Residence in Hilly Area certificates. Each card provides an application action and, where applicable, an expected service timeline.
 
-The monolithic and tangled portal was refactored into 6 dedicated, task-oriented screens based on Goal-Directed Design (GDD).
+\textbf{3. Login and Registration}\\
+A segmented choice separates Citizen Login from VLE (Kendra) Login. CAPTCHA appears only during authentication and includes a refresh control. A single “Forgot credentials?” link opens OTP-based recovery. Registration groups district, Aadhaar and mobile verification into a clear sequence.
 
-\section{Screen 1 --- Homepage}
-\begin{itemize}
-    \item \textbf{Unified Sticky Header:} Aaple Sarkar emblem, 5 primary navigation links (\textit{Home, Services, Track, Help \& FAQ, Contact}), and an outlined \textit{Citizen Login} button.
-    \item \textbf{Deep Blue Hero Canvas (\texttt{\#1A3C6E}):} Clear value proposition with a large centered search bar featuring a saffron orange action button (\texttt{\#F97316}) and quick popular service chips.
-    \item \textbf{Quick Action Cards:} 3 elevated cards for \textit{Apply for Service}, \textit{Track Application}, and \textit{Download Certificate}.
-    \item \textbf{Horizontal Department Tabs:} Scrollable pills (\textit{All, Revenue, Health, Education, Agriculture, Housing, Social Welfare}) with a responsive 3-column card grid.
-    \item \textbf{Integration Strip:} Highlighting \textit{Aadhaar Integrated, DigiLocker Ready, PayGov Payment,} and \textit{Digitally Signed}.
-\end{itemize}
+\textbf{4. Application Tracking}\\
+A centered tracking-ID field allows lookup. The result card presents relevant application details and a status label such as Approved, Under Review, Pending or Rejected. A four-stage progress indicator shows Submitted, Departmental Review, Decision Made and Certificate Ready. Available certificates and acknowledgements can be downloaded.
 
-\section{Screen 2 --- All Services Catalog}
-\begin{itemize}
-    \item Complete catalog of all 13 essential Maharashtra RTS certificates:
-    \textit{Income Certificate, Caste Certificate, Age Nationality Domicile, Senior Citizen Certificate, Solvency Certificate, Non Creamy Layer Certificate, Landless Certificate, General Affidavit, Certified Copy (7/12), Agriculturist Certificate, Cultural Programme Permission, Small Land Holder Certificate,} and \textit{Residence in Hilly Area}.
-    \item Real-time text filtering and category pills with SLA delivery time badges and direct ``Apply Now'' actions.
-\end{itemize}
-
-\section{Screen 3 --- Authentication (Login \& Registration)}
-\begin{itemize}
-    \item Segmented tab toggle for \textit{Citizen Login} vs. \textit{VLE (Kendra) Login}.
-    \item Encapsulated high-contrast CAPTCHA with instant refresh button placed exclusively inside authentication.
-    \item Single accessible \textit{``Forgot credentials?''} link opening an OTP recovery modal.
-    \item Seamless switch to New User Registration containing District, Aadhaar, and Mobile verification.
-\end{itemize}
-
-\section{Screen 4 --- Real-Time Application Tracking}
-\begin{itemize}
-    \item Centered Application Tracking ID lookup with pre-configured demo test chips.
-    \item Result card displaying applicant metadata and color-coded status badges (\textit{Approved, Under Review, Pending, Rejected}).
-    \item Interactive 4-step progress stepper:
-    \textit{Step 1: Submitted $\rightarrow$ Step 2: Departmental Review $\rightarrow$ Step 3: Decision Made $\rightarrow$ Step 4: Certificate Ready}.
-    \item Instant download of digitally signed certificates and acknowledgement receipts.
-\end{itemize}
-
-\section{Screen 5 --- 3-Step Application Wizard}
-\begin{itemize}
-    \item Pre-requisite document checklist before form entry to avoid mid-process abandonment.
-    \item \textbf{Step 1 (Personal Details):} Name, DOB, Gender radio cards, Address, District, and Taluka selectors.
-    \item \textbf{Step 2 (Document Upload):} Drag-and-drop file upload zones with size guidelines and DigiLocker instant retrieval simulation.
-    \item \textbf{Step 3 (Review \& Submit):} Comprehensive data summary, statutory RTS fee calculation (\rupee 23.60 via PayGov), legal self-declaration, and confirmation receipt generation with unique tracking ID (\texttt{MH2026XXXXXXXX}).
-\end{itemize}
-
-\section{Screen 6 --- Help \& Support}
-\begin{itemize}
-    \item Searchable accordion FAQs categorized into General, Login, Process, Documents, and Downloads.
-    \item Citizen support card detailing Toll Free helpline (\textbf{1800-120-8040}), official email, and working hours.
-\end{itemize}
-
-% =============================================================================
-% CHAPTER 5: HMI DESIGN PRINCIPLES VALIDATION
-% =============================================================================
-\chapter{HMI Ergonomic Principles Validated}
-
-\begin{enumerate}[leftmargin=1.2cm]
-    \item \textbf{Hick-Hyman Law ($T = b \cdot \log_2(n + 1)$):} By condensing 48 disparate homepage links into 1 prominent search input and 3 action cards, decision latency is minimized.
-    \item \textbf{Fitts's Law ($MT = a + b \log_2(2D/W)$):} Interactive buttons have generous touch-targets ($>44\text{px}$) and primary CTAs are placed directly along the natural foveal scanpath.
-    \item \textbf{Miller's Law ($7 \pm 2$ Chunking):} Lengthy administrative forms are chunked into a 3-step linear progress stepper.
-    \item \textbf{Norman's Principles of Feedback \& Visibility:} Every state change triggers informative feedback via non-blocking toast notifications, loading spinners, and color-coded status pills.
-    \item \textbf{Progressive Disclosure:} CAPTCHAs and complex bureaucratic rules are hidden until the citizen triggers a relevant step.
-    \item \textbf{Universal Accessibility (WCAG 2.1 AA):} Embedded real-time font resizing controls (A-, A, A+), bilingual toggle (English / Marathi), high text contrast ratios ($>7:1$), and zero emoji dependency.
+\textbf{5. Three-Step Application Wizard}
+\begin{enumerate}
+\item \textbf{Personal details:} name, date of birth, gender, address, district and taluka.
+\item \textbf{Document upload:} clear upload areas, file-size guidance and a proposed DigiLocker retrieval option.
+\item \textbf{Review and submit:} summary of entered details, applicable fee, declaration and confirmation receipt with a tracking ID.
 \end{enumerate}
+A prerequisite checklist is shown before users begin, reducing the chance of discovering missing documents midway through the process.
 
-% =============================================================================
-% CHAPTER 6: CONCLUSION
-% =============================================================================
-\chapter{Conclusion}
+\textbf{6. Help and Support}\\
+Searchable FAQs are grouped into General, Login, Process, Documents and Downloads. A support card provides the verified helpline, official email and service hours. Contact information should be confirmed against the current official portal before release.
 
-The redesign of the Aaple Sarkar portal demonstrates that complex e-governance systems can be transformed into clean, citizen-centric experiences without sacrificing administrative functionality. By eliminating visual clutter, consolidating fragmented navigation, and instituting strict grid alignment:
-
+\section{HMI Principles Applied}
 \begin{itemize}
-    \item Alignment complexity was reduced by **80.8\%** (from 73 alignment lines down to 14).
-    \item Visual clutter was reduced by **77.0\%** (from 148 visual items to 34).
-    \item Visual search time decreased by **72.5\%** (from 3.42s to 0.94s).
+\item \textbf{Hick--Hyman Law:} reducing the number of competing choices supports faster decisions.
+\item \textbf{Fitts's Law:} sufficiently large buttons and prominent primary actions make controls easier to target.
+\item \textbf{Miller's Law and chunking:} grouping information and dividing long forms into three stages makes tasks easier to manage.
+\item \textbf{Norman's feedback and visibility:} status labels, progress indicators, loading feedback and confirmation messages make system state clear.
+\item \textbf{Progressive disclosure:} CAPTCHA and detailed instructions appear when relevant rather than cluttering the homepage.
+\item \textbf{Accessibility:} the proposed interface includes readable contrast, font-size controls, English/Marathi language selection and clear labels. Accessibility should be validated against WCAG 2.1 AA.
 \end{itemize}
 
-The resulting 6-screen web application satisfies all ergonomic standards and provides a trustworthy, accessible digital public infrastructure for the citizens of Maharashtra.
+\section{Conclusion}
+The Aaple Sarkar redesign demonstrates how a task-focused structure can make a government-services interface easier to scan and navigate. The proposal consolidates navigation, removes unnecessary visual elements, groups services, and guides applicants through tracking and form submission. The reported comparison shows an 80.8\% reduction in alignment complexity, 77.0\% fewer visual elements and a 72.5\% reduction in estimated search time. These values should be treated as design estimates until verified through usability testing with representative citizens. The six-screen structure aims to preserve essential functionality while providing a more consistent, accessible and citizen-centered experience.
 
 \end{document}
