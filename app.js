@@ -232,6 +232,12 @@ function showScreen(screenId) {
     btn.classList.toggle("active", btn.dataset.nav === screenId);
   });
 
+  // Update mobile drawer navigation active state
+  const mobileNavButtons = document.querySelectorAll(".mobile-nav-item");
+  mobileNavButtons.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.nav === screenId);
+  });
+
   // Update top helper switcher pill state
   const pills = document.querySelectorAll(".screen-picker-bar .pill-btn");
   pills.forEach(p => {
@@ -275,6 +281,58 @@ function setupNavigationHandlers() {
       e.preventDefault();
       const navTarget = btn.getAttribute("data-nav");
       if (navTarget) showScreen(navTarget);
+    });
+  });
+
+  // Mobile Navigation Drawer Toggle & Close
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileNavDrawer = document.getElementById("mobile-nav-drawer");
+  const mobileNavBackdrop = document.getElementById("mobile-nav-backdrop");
+  const mobileNavClose = document.getElementById("mobile-nav-close");
+
+  function openMobileNav() {
+    if (mobileNavDrawer && mobileNavBackdrop && mobileMenuBtn) {
+      mobileNavDrawer.classList.add("open");
+      mobileNavBackdrop.classList.add("active");
+      mobileMenuBtn.classList.add("active");
+      mobileMenuBtn.setAttribute("aria-expanded", "true");
+      document.body.classList.add("menu-open");
+    }
+  }
+
+  function closeMobileNav() {
+    if (mobileNavDrawer && mobileNavBackdrop && mobileMenuBtn) {
+      mobileNavDrawer.classList.remove("open");
+      mobileNavBackdrop.classList.remove("active");
+      mobileMenuBtn.classList.remove("active");
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+    }
+  }
+
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener("click", () => {
+      const isOpen = mobileNavDrawer && mobileNavDrawer.classList.contains("open");
+      if (isOpen) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    });
+  }
+
+  if (mobileNavClose) {
+    mobileNavClose.addEventListener("click", closeMobileNav);
+  }
+
+  if (mobileNavBackdrop) {
+    mobileNavBackdrop.addEventListener("click", closeMobileNav);
+  }
+
+  // Also close mobile drawer when any mobile nav item is clicked
+  document.querySelectorAll(".mobile-nav-item, #mobile-drawer-login-btn").forEach(item => {
+    item.addEventListener("click", () => {
+      closeMobileNav();
     });
   });
 }
