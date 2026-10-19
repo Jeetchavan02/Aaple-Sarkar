@@ -4,7 +4,7 @@
 > **Topic:** Computing the Complexity of Graphical User Interface and Redesigning it for Minimizing Screen Complexity and Cognitive Entropy.  
 > **Institute:** Fr. Conceiçao Rodrigues College of Engineering (CRCE), Bandra  
 > **Department:** Department of Computer Engineering  
-> **Team:** Sanika Lobo (10613), Meet Mangaonkar (10616), Yash Masaye (10617), Jeet Chavan (10584)
+> **Team:** Jeet Chavan (10584), Sanika Lobo (10613), Yash Masaye (10617), Meet Mangaonkar (10616)
 
 ---
 
